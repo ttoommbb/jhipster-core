@@ -92,7 +92,10 @@ describe('JDLParser', () => {
               departmentName: new JDLField({
                 name: 'departmentName',
                 type: FieldTypes.STRING,
-                validations: { required: new JDLValidation({ name: Validations.REQUIRED }) }
+                validations: {
+                  required: new JDLValidation({ name: Validations.REQUIRED }),
+                  unique: new JDLValidation({ name: Validations.UNIQUE })
+                }
               }),
               description: new JDLField({
                 name: 'description',
@@ -650,6 +653,19 @@ describe('JDLParser', () => {
             expect(Object.keys(content.options.options).length).to.equal(1);
             expect(content.options.options.microservice_ms.entityNames.toString()).to.equal('[A]');
           });
+        });
+      });
+      context('when parsing a JDL with the unique constraint', () => {
+        let content = null;
+
+        before(() => {
+          const input = parseFromFiles(['./test/test_files/unique.jdl']);
+          content = JDLParser.parse(input, 'sql');
+        });
+
+        it('accepts it', () => {
+          expect(content.entities.A.fields.myString.validations.unique).not.to.be.undefined;
+          expect(content.entities.A.fields.myInteger.validations.unique).not.to.be.undefined;
         });
       });
     });

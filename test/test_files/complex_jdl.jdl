@@ -1,6 +1,6 @@
 entity Department {
   departmentId Long,
-  departmentName String required,
+  departmentName String required unique,
   description TextBlob,
   advertisement Blob,
   logo ImageBlob

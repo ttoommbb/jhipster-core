@@ -84,7 +84,7 @@ describe('::exportToJSON', () => {
           {
             fieldName: 'departmentName',
             fieldType: 'String',
-            fieldValidateRules: ['required']
+            fieldValidateRules: ['required', 'unique']
           },
           {
             fieldName: 'description',

@@ -344,6 +344,7 @@ type = head:[A-Z]tail:[A-z0-9]* { return `${head}${tail.join('')}`; }
 
 validation
   = REQUIRED { return { key: 'required', value: '' }; }
+  / UNIQUE { return { key: 'unique', value: ''}; }
   / MINLENGTH SPACE* '(' SPACE* int:INTEGER SPACE* ')' { return { key: 'minlength', value: int }; }
   / MINLENGTH SPACE* '(' SPACE* constantName:CONSTANT_NAME SPACE* ')' { return { key: 'minlength', value: constantName, constant: true }; }
   / MAXLENGTH SPACE* '(' SPACE* int:INTEGER SPACE* ')' { return { key: 'maxlength', value: int }; }
@@ -391,6 +392,7 @@ ANGULAR_SUFFIX = 'angularSuffix'
 FILTER = 'filter'
 // validations
 REQUIRED = 'required'
+UNIQUE = 'unique'
 MINLENGTH = 'minlength'
 MAXLENGTH = 'maxlength'
 MINBYTES = 'minbytes'
